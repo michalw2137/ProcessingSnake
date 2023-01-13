@@ -53,9 +53,14 @@ class Snake {
   
   void checkCollisions() {
     for(int i = 0; i<size; i++) {
-      if(positions.get(i).equals(position) && isMoving) {
-        println("DEATH");  
+      if(positions.get(i).equals(position)) {
+        if(isMoving) {
+          println("DEATH");  
+        }
         isMoving = false;
+        
+        menu.isVisible = true;
+        restart.isVisible = true;
       }
     }  
   }

@@ -1,55 +1,60 @@
-float bottomEdge = 0;
-float rightEdge = 0;
+boolean isPlaying = false;
 
-PVector food;
+float bW = 200, bH = 100;
+Button play, settings, menu, restart;
 
-final int startingSize = 10;
-
-final float step = 30;
-
-final PVector right = new PVector(1,0);
-final PVector left = new PVector(-1,0);
-final PVector up = new PVector(0,-1);
-final PVector down = new PVector(0,1);
-
-Snake snake = new Snake();
+Button[] buttons;
 
 void setup() {
   size(1280,720);
-  bottomEdge = int(height/step) * step;
-  rightEdge = int(width/step) * step;
+  setupGame();
   
-  snake.reset();
-  
-  food = new PVector(0,0);
-  setFood();
-}
+  play = new Button(width/2 - bW/2, height * 0.3 - bH, bW, bH, "PLAY");
+  settings = new Button(width/2 - bW/2, height * 0.5 - bH, bW, bH, "SETTINGS");
+  menu = new Button(width/2 - 1.5*bW, height * 0.3 - bH, bW, bH, "MENU");
+  restart = new Button(width/2 + 0.5*bW, height * 0.3 - bH, bW, bH, "RESTART");
 
-void setFood() {
-  food.x = step * int(random(1, width/step));  
-  food.y = step * int(random(1, height/step));  
+  menu.setVisible(false);
+  restart.setVisible(false);
+  
+  buttons = new Button[]{play, settings, menu, restart};
 }
 
 void draw() {
-  background(0); 
+  background(0);
   
-  snake.move();
+  if(isPlaying) {
+    drawFrame();
+  }
   
-  snake.tryToEat(food);
-  snake.checkCollisions();
-  
-  snake.drawSnake();
-
-  fill(200,0,200);
-  square(food.x, food.y, step);  
-  
-  delay(100);
+  for(Button button : buttons) {
+    button.updateButton();
+    button.drawButton();
+  }
 }
 
 void keyPressed() {
-  snake.processKey();
-  
-  if (key == 'r') {
-      setup();
+  processKey();  
+}
+
+void mousePressed() {
+  if(play.isClicked()) {
+    println("PLAY");
+    play.setVisible(false);
+    settings.setVisible(false);
+    isPlaying = true;
   }
+  if(settings.isClicked()) {
+    println("SETTINGS");
+  }
+  if(menu.isClicked()) {
+    isPlaying = false;  
+    setup();
+  }
+  if(restart.isClicked()) {
+    menu.setVisible(false);
+    restart.setVisible(false);
+    setupGame();
+  }
+  
 }
