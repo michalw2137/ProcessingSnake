@@ -12,13 +12,13 @@ final PVector left = new PVector(-1,0);
 final PVector up = new PVector(0,-1);
 final PVector down = new PVector(0,1);
 
-Snake snake = new Snake();
+Snake snake;
 
 void setupGame(){
   bottomEdge = int(height/step) * step;
   rightEdge = int(width/step) * step;
   
-  snake.reset();
+  snake = new Snake();
   
   food = new PVector(0,0);
   setFood();

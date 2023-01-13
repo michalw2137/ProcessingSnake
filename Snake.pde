@@ -6,9 +6,16 @@ class Snake {
   boolean isMoving = false;
   int size = 0;
 
-  Snake() { }
+  PImage head, tail;
+
+  Snake() { 
+    reset();
+  }
   
   void reset() {
+    head = loadImage("res/head.png");
+    tail = loadImage("res/body.png");
+    
     position = new PVector(rightEdge/2, bottomEdge / 2);
     direction = left;
     
@@ -73,13 +80,15 @@ class Snake {
   void drawBody() {
     fill(200);
     for(int i = 0; i<size; i++) {
-      square(positions.get(i).x, positions.get(i).y, step);  
+      //square(positions.get(i).x, positions.get(i).y, step);  
+      image(tail, positions.get(i).x, positions.get(i).y, step, step);
     } 
   }
   
   void drawHead() {
     fill(0,200,0);
-    square(position.x, position.y, step); 
+    //square(position.x, position.y, step); 
+    image(head, position.x, position.y, step, step);
   }
 
   void processKey() {
