@@ -1,7 +1,8 @@
 class Snake {
-
-  ArrayList<PVector> body;
+  
   ArrayList<PVector> positions;
+  ArrayList<PVector> directions;
+
   PVector direction, position;
   boolean isMoving = false;
   int size = 0;
@@ -23,14 +24,17 @@ class Snake {
     isMoving = true;
       
     positions = new ArrayList<>();
+    directions = new ArrayList<>();
     for(int i=0; i<size; i++) {
       positions.add(position.copy());  
+      directions.add(direction.copy());
     }  
   }
   
   void move() {
     if(isMoving) {
       positions.add(0, position.copy());
+      directions.add(0, direction);
       
       position.x += direction.x * step;
       position.y += direction.y * step;
@@ -72,23 +76,54 @@ class Snake {
     }  
   }
   
+  
   void drawSnake() {
+    //println();
+    //println(directions);
     drawBody();
     drawHead();     
   }
   
   void drawBody() {
     fill(200);
+    imageMode(CENTER);
+
     for(int i = 0; i<size; i++) {
-      //square(positions.get(i).x, positions.get(i).y, step);  
-      image(tail, positions.get(i).x, positions.get(i).y, step, step);
+      //square(positions.get(i).x, positions.get(i).y, step);        
+      pushMatrix();
+        translate(positions.get(i).x, positions.get(i).y);
+        rotate(angle(directions.get(i)));
+        image(tail, 0, 0, step, step);
+      popMatrix();
     } 
   }
   
   void drawHead() {
     fill(0,200,0);
     //square(position.x, position.y, step); 
-    image(head, position.x, position.y, step, step);
+    imageMode(CENTER);
+    pushMatrix();
+      translate(position.x, position.y);
+      rotate(angle(direction));
+      image(head, 0, 0, step, step);
+    popMatrix();
+  }
+  
+  float angle(PVector dir) {
+    float angle = 0;
+    if(dir == left) {
+      angle = -90; 
+    }
+    if(dir == right) {
+      angle = 90; 
+    }
+    if(dir == up) {
+      angle = 0; 
+    }
+    if(dir == down) {
+      angle = 180; 
+    }
+    return radians(angle);
   }
 
   void processKey() {

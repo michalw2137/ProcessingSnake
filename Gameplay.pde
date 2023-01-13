@@ -6,15 +6,20 @@ PVector food;
 final int startingSize = 10;
 
 final float step = 30;
+final float stepSpeed = 30;
 
-final PVector right = new PVector(1,0);
-final PVector left = new PVector(-1,0);
-final PVector up = new PVector(0,-1);
-final PVector down = new PVector(0,1);
+final PVector right = new PVector(1,0,0);
+final PVector left = new PVector(-1,0,0);
+final PVector up = new PVector(0,-1,0);
+final PVector down = new PVector(0,1,0);
 
+
+PImage foodImg;
 Snake snake;
 
 void setupGame(){
+  foodImg = loadImage("res/food.png");
+
   bottomEdge = int(height/step) * step;
   rightEdge = int(width/step) * step;
   
@@ -25,8 +30,8 @@ void setupGame(){
 }
 
 void setFood() {
-  food.x = step * int(random(1, width/step));  
-  food.y = step * int(random(1, height/step));  
+  food.x = stepSpeed * int(random(1, width/step));  
+  food.y = stepSpeed * int(random(1, height/step));  
 }
 
 void drawFrame() {
@@ -40,15 +45,14 @@ void drawFrame() {
   snake.drawSnake();
 
   fill(200,0,200);
-  square(food.x, food.y, step);  
+  imageMode(CENTER);
+  image(foodImg, food.x, food.y, step, step);  
   
-  delay(100);
+  delay(50);
 }
 
 void processKey() {
   snake.processKey();
   
-  if (key == 'r') {
-      setup();
-  }
+
 }
