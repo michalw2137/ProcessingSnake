@@ -74,8 +74,6 @@ class Snake {
   
   
   void drawSnake() {
-    //println();
-    //println(directions);
     drawBody();
     drawHead();     
   }

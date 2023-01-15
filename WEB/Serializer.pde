@@ -1,5 +1,4 @@
 void load() {  
-  println("load start");
   headImage = loadImage("save/head.png");
   bodyImage = loadImage("save/body.png");
   JSONObject json = loadJSONObject("save/replay.json");
@@ -24,6 +23,5 @@ void load() {
     float y = position.getFloat("y");
     foodPositions.add(new PVector(x, y));
   }
-  println(foodPositions);
-  println("load end");
+ 
 }

@@ -103,9 +103,11 @@ void mousePressed() {
   }
   
   if(selectHead.isClicked()) {
+    println("SELECT HEAD");
     selectInput("Select head file:", "headSelected");  
   }
   if(selectBody.isClicked()) {
+    println("SELECT BODY");
     selectInput("Select body file:", "bodySelected");  
   }
 }

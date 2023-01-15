@@ -23,7 +23,6 @@ int foodIndex, directionIndex;
 
 void setupGame(){
   load();
-  println(foodPositions);
   
   foodIndex = 0;
   directionIndex = directions.size() - 11;
@@ -59,7 +58,6 @@ void drawFrame() {
   snake.move();
   
   snake.tryToEat(food);
-  println(food, snake.position, snake.direction);
   snake.drawSnake();
 
   fill(200,0,200);
