@@ -4,7 +4,7 @@ void serialize() {
   for(PVector direction : snake.directions) {
     JSONObject json = new JSONObject();
     json.setFloat("x", direction.x);
-    json.setFloat("y", direction.x);
+    json.setFloat("y", direction.y);
     directions.append(json);
   }
   
@@ -12,7 +12,7 @@ void serialize() {
   for(PVector position : foodPositions) {
     JSONObject json = new JSONObject();
     json.setFloat("x", position.x);
-    json.setFloat("y", position.x);
+    json.setFloat("y", position.y);
     foods.append(json);
   }
   
