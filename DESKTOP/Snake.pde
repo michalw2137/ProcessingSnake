@@ -67,11 +67,9 @@ class Snake {
       if(positions.get(i).equals(position)) {
         if(isMoving) {
           println("DEATH");  
-        }
-        isMoving = false;
-        
-        menu.isVisible = true;
-        restart.isVisible = true;
+          serialize();
+          setStatePause();
+        }        
       }
     }  
   }

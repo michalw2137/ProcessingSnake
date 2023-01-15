@@ -14,7 +14,6 @@ State state;
 
 void setup() {
   size(1280,720);
-  setupGame();
   
   state = State.MENU;
   
@@ -44,7 +43,7 @@ void setup() {
 void draw() {
   background(0);
   
-  if(state == State.GAME) {
+  if(state == State.GAME || state == State.PAUSE) {
     drawFrame();
   }
   
@@ -95,7 +94,6 @@ void mousePressed() {
   if(restart.isClicked()) {
     println("RESTART");
     setStateGame();
-    setupGame();
   }
   if(save.isClicked()) {
     println("SAVE");
@@ -145,6 +143,8 @@ void setStateMenu() {
 }
 
 void setStateGame() {
+  setupGame();
+  
   state = State.GAME;
   for(Button button : buttons) {
     button.setVisible(false);
@@ -153,6 +153,7 @@ void setStateGame() {
 
 void setStatePause() {
   state = State.PAUSE;
+  snake.isMoving = false;
   for(Button button : buttons) {
     button.setVisible(false);
   }

@@ -13,11 +13,14 @@ final PVector left = new PVector(-1,0,0);
 final PVector up = new PVector(0,-1,0);
 final PVector down = new PVector(0,1,0);
 
+ArrayList<PVector> foodPositions;
 
 PImage foodImg;
 Snake snake;
 
 void setupGame(){
+  foodPositions = new ArrayList<>();
+  
   foodImg = loadImage("res/food.png");
 
   bottomEdge = int(height/step) * step;
@@ -32,6 +35,7 @@ void setupGame(){
 void setFood() {
   food.x = stepSpeed * int(random(1, width/step));  
   food.y = stepSpeed * int(random(1, height/step));  
+  foodPositions.add(food.copy());
 }
 
 void drawFrame() {
