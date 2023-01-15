@@ -14,8 +14,8 @@ class Snake {
   }
   
   void reset() {
-    head = loadImage("res/head.png");
-    tail = loadImage("res/body.png");
+    head = headImage;
+    tail = bodyImage;
     
     position = new PVector(rightEdge/2, bottomEdge / 2);
     direction = left;

@@ -8,6 +8,8 @@ TextField nameField;
 
 Button[] buttons;
 
+PImage defaultHead, defaultBody, headImage, bodyImage;
+
 State state;
 
 void setup() {
@@ -17,7 +19,7 @@ void setup() {
   state = State.MENU;
   
   play = new Button(width/2 - bW/2, height * 0.3 - bH, bW, bH, "PLAY");
-  settings = new Button(width/2 - bW/2, height * 0.5 - bH, bW, bH, "SETTINGS");
+  settings = new Button(width/2 - bW * 0.75, height * 0.5 - bH, bW * 1.5, bH, "SETTINGS");
   exit = new Button(width/2 - bW/2, height * 0.7 - bH, bW, bH, "EXIT");
 
   menu = new Button(width/2 - 1.5*bW, height * 0.3 - bH, bW, bH, "MENU");
@@ -25,11 +27,16 @@ void setup() {
 
   selectHead = new Button(width/2 - 1.5*bW, height * 0.6 - bH, bW, bH, "browse..");
   selectBody = new Button(width/2 + 0.5*bW, height * 0.6 - bH, bW, bH, "browse..");
-  save = new Button(width/2 - bW/2, height * 0.8 - bH, bW, bH, "SAVE");
+  save = new Button(width/2 - bW/2, height * 0.95 - bH, bW, bH, "SAVE");
   
-  nameField = new TextField(width/2 - bW/2, height * 0.3 - bH, bW, bH);
+  nameField = new TextField(width/2 - bW, height * 0.8 - bH, 2*bW, bH);
 
   buttons = new Button[]{play, settings, exit, menu, restart, selectHead, selectBody, save, nameField};
+  
+  defaultHead = loadImage("res/head2.png");
+  defaultBody = loadImage("res/body2.png");
+  headImage = defaultHead;
+  bodyImage = defaultBody;
   
   setStateMenu();
 }
@@ -43,7 +50,9 @@ void draw() {
   
   if(state == State.SETTINGS) {
     background(0,0,100);  
-    drawSettings();
+    image(headImage, selectHead.x, selectHead.y - 200, 200, 200);
+    image(bodyImage, selectBody.x, selectBody.y - 200, 200, 200);
+
   }
   
   for(Button button : buttons) {
@@ -91,6 +100,37 @@ void mousePressed() {
   if(save.isClicked()) {
     println("SAVE");
     setStateMenu();
+  }
+  
+  if(selectHead.isClicked()) {
+    selectInput("Select head file:", "headSelected");  
+  }
+  if(selectBody.isClicked()) {
+    selectInput("Select body file:", "bodySelected");  
+  }
+}
+
+void headSelected(File selection) {
+  if (selection == null) {
+    println("Window was closed or the user hit cancel.");
+  } else {
+    println("User selected " + selection.getAbsolutePath());
+    headImage = loadImage(selection.getAbsolutePath()); 
+    if(headImage == null) {
+      headImage = defaultHead;  
+    }
+  }
+}
+
+void bodySelected(File selection) {
+  if (selection == null) {
+    println("Window was closed or the user hit cancel.");
+  } else {
+    println("User selected " + selection.getAbsolutePath());
+    bodyImage = loadImage(selection.getAbsolutePath()); 
+    if(bodyImage == null) {
+      bodyImage = defaultBody;  
+    }
   }
 }
 

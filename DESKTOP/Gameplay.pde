@@ -48,7 +48,7 @@ void drawFrame() {
   imageMode(CENTER);
   image(foodImg, food.x, food.y, step, step);  
   
-  delay(50);
+  delay(75);
 }
 
 void processKey() {
