@@ -36,6 +36,7 @@ void setFood() {
   food.x = stepSpeed * int(random(1, width/step));  
   food.y = stepSpeed * int(random(1, height/step));  
   foodPositions.add(food.copy());
+  println("food = ", food);
 }
 
 void drawFrame() {
@@ -46,6 +47,8 @@ void drawFrame() {
   snake.tryToEat(food);
   snake.checkCollisions();
   
+  println(food, snake.position, snake.direction);
+
   snake.drawSnake();
 
   fill(200,0,200);
