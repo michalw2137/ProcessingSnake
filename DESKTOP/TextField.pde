@@ -46,7 +46,7 @@ class TextField extends Button {
       }
       return;  
     }
-
+    //println(name);
     name += key;
   }
   

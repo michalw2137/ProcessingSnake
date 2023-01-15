@@ -61,7 +61,9 @@ void draw() {
 }
 
 void keyPressed() {
-  processKey();  
+  if(state == State.GAME) {
+      processKey();  
+  }
   nameField.keyIsPressed();
 }
 

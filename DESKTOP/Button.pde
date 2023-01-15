@@ -24,10 +24,10 @@ class Button
       return;  
     }
     if (isActive) {
-      fill(50);
+      fill(150);
       rect(x-increase, y-increase, w+2*increase, h+2*increase);
     } else {
-      fill(20);
+      fill(50);
       rect(x, y, w, h);
     }
 
