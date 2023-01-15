@@ -40,6 +40,13 @@ class Button
     if(!isVisible) {
       return false;  
     }
+    return touchesMouse();  
+  }
+
+  private boolean touchesMouse() {
+    if(!isVisible) {
+      return false;  
+    }
     return mouseX > x - increase && mouseX < x + w + increase && mouseY > y - increase && mouseY < y + h + increase;
   }
 
@@ -47,7 +54,7 @@ class Button
     if(!isVisible) {
       return;  
     }
-    if(isClicked()) {
+    if(touchesMouse()) {
       isActive = true;  
     } else {
       isActive = false;

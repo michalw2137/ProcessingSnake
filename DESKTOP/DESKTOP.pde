@@ -3,7 +3,8 @@ boolean isPlaying = false;
 enum State {GAME, MENU, SETTINGS, PAUSE }
 
 float bW = 200, bH = 100;
-Button play, settings, menu, restart, selectHead, selectBody, save;
+Button play, settings, menu, restart, selectHead, selectBody, save, exit;
+TextField nameField;
 
 Button[] buttons;
 
@@ -17,6 +18,8 @@ void setup() {
   
   play = new Button(width/2 - bW/2, height * 0.3 - bH, bW, bH, "PLAY");
   settings = new Button(width/2 - bW/2, height * 0.5 - bH, bW, bH, "SETTINGS");
+  exit = new Button(width/2 - bW/2, height * 0.7 - bH, bW, bH, "EXIT");
+
   menu = new Button(width/2 - 1.5*bW, height * 0.3 - bH, bW, bH, "MENU");
   restart = new Button(width/2 + 0.5*bW, height * 0.3 - bH, bW, bH, "RESTART");
 
@@ -24,14 +27,11 @@ void setup() {
   selectBody = new Button(width/2 + 0.5*bW, height * 0.6 - bH, bW, bH, "browse..");
   save = new Button(width/2 - bW/2, height * 0.8 - bH, bW, bH, "SAVE");
   
-  menu.setVisible(false);
-  restart.setVisible(false);
-  selectHead.setVisible(false);
-  selectBody.setVisible(false);
-  save.setVisible(false);
-  
-  buttons = new Button[]{play, settings, menu, restart, selectHead, selectBody, save};
+  nameField = new TextField(width/2 - bW/2, height * 0.3 - bH, bW, bH);
 
+  buttons = new Button[]{play, settings, exit, menu, restart, selectHead, selectBody, save, nameField};
+  
+  setStateMenu();
 }
 
 void draw() {
@@ -54,6 +54,7 @@ void draw() {
 
 void keyPressed() {
   processKey();  
+  nameField.keyIsPressed();
 }
 
 void mousePressed() {
@@ -67,6 +68,16 @@ void mousePressed() {
 
     setStateSettings();
   }
+  if(exit.isClicked()) {
+    println("EXIT");
+
+    exit();
+  }
+  
+  if(nameField.isClicked()) {
+    println("entering name");
+  }
+  
   if(menu.isClicked()) {
     println("BACK TO MENU");
 
@@ -78,7 +89,7 @@ void mousePressed() {
     setupGame();
   }
   if(save.isClicked()) {
-    println("RESTART");
+    println("SAVE");
     setStateMenu();
   }
 }
@@ -90,6 +101,7 @@ void setStateMenu() {
   }
   play.setVisible(true);
   settings.setVisible(true);
+  exit.setVisible(true);
 }
 
 void setStateGame() {
@@ -116,4 +128,5 @@ void setStateSettings() {
   save.setVisible(true);
   selectHead.setVisible(true);
   selectBody.setVisible(true);
+  nameField.setVisible(true);
 }
