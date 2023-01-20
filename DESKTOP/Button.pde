@@ -4,7 +4,7 @@ class Button
   PFont font;
   boolean isActive;
   String label;
-  
+  PImage image;
   boolean isVisible = true;
 
   float increase = 10;
@@ -17,6 +17,7 @@ class Button
     this.font = createFont("Georgia", 32);
     isActive = false;
     this.label = label;
+    image = loadImage(label);
   }
 
   public void drawButton() {
@@ -24,16 +25,12 @@ class Button
       return;  
     }
     if (isActive) {
-      fill(150);
-      rect(x-increase, y-increase, w+2*increase, h+2*increase);
+      image(this.image, x-increase, y-increase, w+2*increase, h+2*increase);
     } else {
       fill(50);
-      rect(x, y, w, h);
+      image(this.image, x, y, w, h);
     }
 
-    textFont(font, h/2.0f);
-    fill(0);
-    text(label, x + 10, y + h/2 + textAscent() / 2);
   }
 
   public boolean isClicked() {

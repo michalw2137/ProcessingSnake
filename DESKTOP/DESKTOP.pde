@@ -8,7 +8,7 @@ TextField nameField;
 
 Button[] buttons;
 
-PImage defaultHead, defaultBody, headImage, bodyImage;
+PImage defaultHead, defaultBody, headImage, bodyImage, background;
 
 State state;
 
@@ -17,16 +17,16 @@ void setup() {
   
   state = State.MENU;
   
-  play = new Button(width/2 - bW/2, height * 0.3 - bH, bW, bH, "PLAY");
-  settings = new Button(width/2 - bW * 0.75, height * 0.5 - bH, bW * 1.5, bH, "SETTINGS");
-  exit = new Button(width/2 - bW/2, height * 0.7 - bH, bW, bH, "EXIT");
+  play = new Button(width/2 - bW/2, height * 0.3 - bH, bW, bH, "res/playButton.png");
+  settings = new Button(width/2 - bW * 0.75, height * 0.5 - bH, bW * 1.5, bH, "res/settingsButton.png");
+  exit = new Button(width/2 - bW/2, height * 0.7 - bH, bW, bH, "res/exitButton.png");
 
-  menu = new Button(width/2 - 1.5*bW, height * 0.3 - bH, bW, bH, "MENU");
-  restart = new Button(width/2 + 0.5*bW, height * 0.3 - bH, bW, bH, "RESTART");
+  menu = new Button(width/2 - 1.5*bW, height * 0.3 - bH, bW, bH, "res/menuButton.png");
+  restart = new Button(width/2 + 0.5*bW, height * 0.3 - bH, bW, bH, "res/restartButton.png");
 
-  selectHead = new Button(width/2 - 1.5*bW, height * 0.6 - bH, bW, bH, "browse..");
-  selectBody = new Button(width/2 + 0.5*bW, height * 0.6 - bH, bW, bH, "browse..");
-  save = new Button(width/2 - bW/2, height * 0.95 - bH, bW, bH, "SAVE");
+  selectHead = new Button(width/2 - 1.5*bW, height * 0.6 - bH, bW, bH, "res/browseButton.png");
+  selectBody = new Button(width/2 + 0.5*bW, height * 0.6 - bH, bW, bH, "res/browseButton.png");
+  save = new Button(width/2 - bW/2, height * 0.95 - bH, bW, bH, "res/saveButton.png");
   
   nameField = new TextField(width/2 - bW, height * 0.8 - bH, 2*bW, bH);
 
@@ -34,25 +34,31 @@ void setup() {
   
   defaultHead = loadImage("res/head2.png");
   defaultBody = loadImage("res/body2.png");
+  
+  background = loadImage("res/background.png");
   headImage = defaultHead;
   bodyImage = defaultBody;
   
   setStateMenu();
+  state = State.MENU;
 }
 
 void draw() {
-  background(0);
+      background(0, 100, 30); 
+
+  if(state == State.MENU) {
+    image(background, 0, 0, width*2, height*2);
+
+  }
   
   if(state == State.GAME || state == State.PAUSE) {
     drawFrame();
-  }
-  
-  if(state == State.SETTINGS) {
+  } else if(state == State.SETTINGS) {
     background(0,0,100);  
     image(headImage, selectHead.x, selectHead.y - 200, 200, 200);
     image(bodyImage, selectBody.x, selectBody.y - 200, 200, 200);
 
-  }
+  } 
   
   for(Button button : buttons) {
     button.updateButton();

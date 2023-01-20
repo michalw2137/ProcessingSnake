@@ -39,8 +39,8 @@ void setFood() {
 }
 
 void drawFrame() {
-  background(0); 
-  
+  //background(0, 100, 30); 
+
   snake.move();
   
   snake.tryToEat(food);
