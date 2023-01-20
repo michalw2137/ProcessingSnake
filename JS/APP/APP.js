@@ -44,18 +44,18 @@ function setup() {
 
   rectMode(CENTER);
   createCanvas(displayWidth, displayHeight);
-  colorMode(HSB, 360, 100, 100);
+  //colorMode(HSB, 360, 100, 100);
       
   setupGame();
 
 }
 
 function draw() {
-  background(0);
+  background(0,100,30);
   drawFrame();
 
 
-  fill(50);
+  fill(0, 60, 0);
   textSize(50);
   text("highscore: ", width/3, height*0.2);
 
@@ -63,11 +63,11 @@ function draw() {
   textSize(100);
   text(score, width/2, height*0.2);
   
-  fill(50);
+  fill(0, 60, 0);
   textSize(50);
   text("by: ", width/3, height*0.3);
 
-  fill(50);
+  fill(0, 40, 0);
   textSize(50);
   text(playerName, width/2 - textWidth(playerName)/4, height*0.3);
 }
@@ -118,7 +118,7 @@ function setupGame(){
 //}
 
 function drawFrame() {
-background(0); 
+//background(0, 0, 30); 
   
   if(directionIndex > 0) {
     snake.direction = directions[directionIndex];
