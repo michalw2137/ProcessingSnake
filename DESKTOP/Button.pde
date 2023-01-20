@@ -1,7 +1,6 @@
 class Button
 {
   float x, y, w, h;
-  PFont font;
   boolean isActive;
   String label;
   PImage image;
@@ -14,10 +13,9 @@ class Button
     this.y = y;
     this.w = w;
     this.h = h;
-    this.font = createFont("Georgia", 32);
     isActive = false;
     this.label = label;
-    image = loadImage(label);
+    if(!label.equals("enter name")) image = loadImage(label);
   }
 
   public void drawButton() {

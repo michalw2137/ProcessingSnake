@@ -8,19 +8,20 @@ class TextField extends Button {
   }
   
   public void drawButton() {
+    noStroke();
     if(!isVisible) {
       return;  
     }
     if (isActive) {
-      fill(200);
+      fill(150, 240, 150);
       rect(x, y, w, h);
     } else {
-      fill(20);
+      fill(0, 50, 10);
       rect(x, y, w, h);
     }
 
-    textFont(font, h/2.0f);
-    fill(0);
+    textSize(30);
+    fill(0, 30, 0);
    
     if(name.isEmpty() || name.isBlank()) {
       text(label, x + 10, y + h/2 + textAscent() / 2); 

@@ -18,17 +18,17 @@ void setup() {
   state = State.MENU;
   
   play = new Button(width/2 - bW/2, height * 0.3 - bH, bW, bH, "res/playButton.png");
-  settings = new Button(width/2 - bW * 0.75, height * 0.5 - bH, bW * 1.5, bH, "res/settingsButton.png");
+  settings = new Button(width/2 - bW/2, height * 0.5 - bH, bW, bH, "res/settingsButton.png");
   exit = new Button(width/2 - bW/2, height * 0.7 - bH, bW, bH, "res/exitButton.png");
 
-  menu = new Button(width/2 - 1.5*bW, height * 0.3 - bH, bW, bH, "res/menuButton.png");
-  restart = new Button(width/2 + 0.5*bW, height * 0.3 - bH, bW, bH, "res/restartButton.png");
+  menu = new Button(width/2 - bW, height * 0.3 - bH, bW, bH, "res/menuButton.png");
+  restart = new Button(width/2 + bW, height * 0.3 - bH, bW, bH, "res/restartButton.png");
 
   selectHead = new Button(width/2 - 1.5*bW, height * 0.6 - bH, bW, bH, "res/browseButton.png");
   selectBody = new Button(width/2 + 0.5*bW, height * 0.6 - bH, bW, bH, "res/browseButton.png");
   save = new Button(width/2 - bW/2, height * 0.95 - bH, bW, bH, "res/saveButton.png");
   
-  nameField = new TextField(width/2 - bW, height * 0.8 - bH, 2*bW, bH);
+  nameField = new TextField(width/2 - bW, height * 0.78 - bH, 2*bW, bH);
 
   buttons = new Button[]{play, settings, exit, menu, restart, selectHead, selectBody, save, nameField};
   
@@ -54,7 +54,7 @@ void draw() {
   if(state == State.GAME || state == State.PAUSE) {
     drawFrame();
   } else if(state == State.SETTINGS) {
-    background(0,0,100);  
+    background(0,100,30);  
     image(headImage, selectHead.x, selectHead.y - 200, 200, 200);
     image(bodyImage, selectBody.x, selectBody.y - 200, 200, 200);
 
